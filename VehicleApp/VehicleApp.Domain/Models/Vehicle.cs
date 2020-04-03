@@ -5,12 +5,13 @@ using System.Text;
 
 namespace VehicleApp.Domain.Models
 {
-    public class Car
+    public class Vehicle
     {
         public int Id { get; set; }
         public string VehicleRegisteredNum { get; set; }
         public string Brand { get; set; }
         public string Color { get; set; }
+        public string VehicleType { get; set; }
         public string Directorate { get; set; }
         public string EngineNum { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
@@ -19,7 +20,8 @@ namespace VehicleApp.Domain.Models
         public DateTime? RegistrationExpiryDate { get; set; }
         public bool Malfunction { get; set; }
         public bool Loan { get; set; }
-        public string VehicleType { get; set; }
         public string EmployeeName { get; set; }
+
+        public virtual IEnumerable<Order> Orders { get; set; }
     }
 }
