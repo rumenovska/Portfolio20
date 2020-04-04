@@ -1,0 +1,139 @@
+﻿@model List<VehicleViewModel>
+@{
+    ViewData["Title"] = "Vehicles";
+}
+
+<style>
+    .myTable > tbody > tr > td, .mytable > tbody > tr > th, .myTable > thead > tr > td, .myTable > thead > tr > th {
+        padding: 12px;
+    }
+
+    #button-col {
+        border-bottom: hidden;
+        border-left: hidden;
+        border-top: hidden;
+        color: none !important;
+    }
+
+    .opcii_navbar {
+        overflow: hidden;
+        background-color: #333;
+    }
+
+        .opcii_navbar a {
+            float: left;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+    .opcii_dropdown {
+        float: left;
+        overflow: hidden;
+    }
+
+        .opcii_dropdown .opcii_dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 10px 10px;
+            background-color: #6699ff;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .opcii_navbar a:hover, .opcii_dropdown:hover .opcii_dropbtn {
+            background-color: red;
+        }
+
+    .opcii_dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .opcii_dropdown-content a {
+            float: none;
+            color: black;
+            padding: 10px 10px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+            .opcii_dropdown-content a:hover {
+                background-color: #ddd;
+            }
+
+    .opcii_dropdown:hover .opcii_dropdown-content {
+        display: block;
+    }
+</style>
+<br />
+<br />
+<table style="overflow-x:auto; white-space:nowrap; margin:auto;" class=" table-bordered table-striped  myTable">
+    <thead>
+        <tr>
+            <th id="button-col"></th>
+            <th scope="col">Employee Name</th>
+            <th scope="col">Directorate</th>
+            <th scope="col">Vehicle Registered Number </th>
+            <th scope="col">Registration Expiry Date</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vehicle in Model)
+        {
+            <tr>
+                <td id="button-col" align="center">
+                    <div class="opcii_navbar">
+                        <div class="opcii_dropdown">
+                            <button class="opcii_dropbtn">
+                                Опции
+                                <i class="fa fa-caret-down"></i>
+                            </button>
+                            <div class="opcii_dropdown-content">
+                                <a asp-controller="Vozilo"
+                                   asp-action="DetaliVozila"
+                                   asp-route-voziloId="@vehicle.Id">Details</a>
+                                <a asp-controller="Nabavka"
+                                   asp-action="DodadiNabavka"
+                                   asp-route-voziloId="@vehicle.Id">Add Order</a>
+                                @*<a asp-controller="Dogovor"
+                                    asp-action="AddDogovor"
+                                    asp-route-voziloId="@vozilo.Id">Додади Договор</a>*@
+                                @*<a asp-controller="Servis"
+                                    asp-action="AddServis"
+                                    asp-route-voziloId="@vozilo.Id">Додади Сервис</a>*@
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>@vehicle.EmployeeName</td>
+                <td>@vehicle.Directorate</td>
+                <td>@vehicle.VehicleRegisteredNum</td>
+                @if (vehicle.DisplayDate == "Vehicle Registration Expired")
+                {
+                    <td>@vehicle.DisplayDate</td>
+                }
+                else
+                {
+                    <td>@vehicle.RegistrationExpiryDate.ToString("dd/MM/yyyy")</td>
+                }
+
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+<a class="btn btn-primary btn-lg" asp-controller="Vehicle" asp-action="AddVehicle">Add Vehicle</a>
+

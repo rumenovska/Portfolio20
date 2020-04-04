@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\VehicleApp.DataAccess\VehicleApp.DataAccess.csproj" />
+    <ProjectReference Include="..\VehicleApp.Domain\VehicleApp.Domain.csproj" />
+    <ProjectReference Include="..\VehicleApp.WebModels\VehicleApp.WebModels.csproj" />
+  </ItemGroup>
+
+</Project>
