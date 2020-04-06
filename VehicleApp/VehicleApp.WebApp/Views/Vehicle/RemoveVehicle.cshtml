@@ -1,0 +1,89 @@
+﻿@model VehicleViewModel
+@{
+    ViewData["Title"] = "RemoveVehicle";
+}
+
+<h2>Are you sure you want permanently delete this vehicle?</h2>
+<br />
+<br />
+
+<form asp-controller="vehicle" asp-action="removevehicle" method="post">
+    <div class="form-row align-items-center">
+        <div class="row">
+            <div><input asp-for="Id" value="@Model.Id" hidden /></div>
+            <div class="col-md-3">
+                <label>Employee Name</label>
+                <input asp-for="EmployeeName" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="@Model.EmployeeName" readonly>
+            </div>
+
+            <div class="col-md-3">
+                <label>Directorate</label>
+                <input asp-for="Directorate" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="@Model.Directorate" readonly>
+            </div>
+
+            <div class="col-md-3">
+                <label>Brand</label>
+                <input asp-for="Brand" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="@Model.Brand" readonly>
+            </div>
+
+            <div class="col-md-3">
+
+                <label>Vehicle Type</label>
+                <input type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.VehicleType" readonly>
+            </div>
+
+
+
+        </div>
+
+            <br />
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Vehicle Registered Number</label>
+                    <input asp-for="VehicleRegisteredNum" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="@Model.VehicleRegisteredNum" readonly>
+                </div>
+
+                <div class="col-md-3">
+                    <label>First Registration</label>
+                    <input asp-for="FirstRegistration" type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.FirstRegistration.ToString("dd/MM/yyyy")" readonly>
+                </div>
+
+                <div class="col-md-3">
+                    <label>RegistrationExpiryDate</label>
+                    <input asp-for="RegistrationExpiryDate" type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.RegistrationExpiryDate.ToString("dd/MM/yyyy")" readonly>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Engine Number</label>
+                    <input asp-for="EngineNum" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="@Model.EngineNum" readonly>
+                </div>
+
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Color</label>
+                    <input asp-for="Color" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="@Model.Color" readonly>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="Malfunction">Malfunction</label>
+                    <div class="input-group">
+                        <input onclick="return false" asp-for="Malfunction" type="checkbox" />
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <label asp-for="Loan">Loan</label>
+                    <div class="input-group">
+                        <input asp-for="Loan" type="checkbox" onclick="return false" />
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-2">Yes</button>
+                <a class="btn btn-info" asp-controller="Vehicle" asp-action="Vehicles">No</a>
+            </div>
+
+        </div>
+</form>

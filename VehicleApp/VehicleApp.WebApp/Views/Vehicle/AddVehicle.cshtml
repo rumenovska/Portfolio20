@@ -1,0 +1,90 @@
+﻿@model VehicleViewModel
+@{
+    ViewData["Title"] = "AddVehicle";
+}
+
+<br />
+<h3>Add Vehicle</h3>
+<form asp-controller="vehicle" asp-action="addvehicle" method="post">
+    <div class="form-row align-items-center">
+        <div class="row">
+
+            <div class="col-md-3">
+                <label>Employee Name</label>
+                <input asp-for="EmployeeName" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Employee Name">
+            </div>
+
+            <div class="col-md-3">
+                <label>Directorate</label>
+                <input asp-for="Directorate" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Directorate">
+            </div>
+
+            <div class="col-md-3">
+                <label>Brand</label>
+                <input asp-for="Brand" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Brand">
+            </div>
+
+            <div class="col-md-3">
+
+                <label>Vehicle Type</label>
+                <select asp-for="VehicleType" class="form-control mb-2">
+                    <option value="" selected>Select</option>
+                    <option value="car">Car</option>
+                    <option value="truck">Truck</option>
+                    <option value="motorcycle">Motorcycle</option>
+                </select>
+            </div>
+
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <label>Vehicle Registered Number</label>
+                <input asp-for="VehicleRegisteredNum" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Vehicle Registered Number">
+            </div>
+
+            <div class="col-md-3">
+                <label>First Registration</label>
+                <input asp-for="FirstRegistration" type="date" class="form-control mb-2" id="inlineFormInput" placeholder="First Registration">
+            </div>
+
+            <div class="col-md-3">
+                <label>Registration Expiry Date</label>
+                <input asp-for="RegistrationExpiryDate" type="date" class="form-control mb-2" id="inlineFormInput" placeholder="Registration Expiry Date">
+            </div>
+
+            <div class="col-md-3">
+                <label>Engine Number</label>
+                <input asp-for="EngineNum" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Engine Number">
+            </div>
+
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <label>Color</label>
+                <input asp-for="Color" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Color">
+            </div>
+            <div class="col-md-1">
+                <label asp-for="Malfunction">Malfunction</label>
+                <div class="input-group">
+                    <input asp-for="Malfunction" type="checkbox" />
+                </div>
+            </div>
+            <div class="col-md-1">
+                <label asp-for="Loan">Loan</label>
+                <div class="input-group">
+                    <input asp-for="Loan" type="checkbox" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-2">Save</button>
+    </div>
+
+</form>
+

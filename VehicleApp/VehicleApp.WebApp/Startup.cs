@@ -11,12 +11,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NToastNotify;
 using VehicleApp.DataAccess;
 using VehicleApp.DataAccess.Interfaces;
 using VehicleApp.DataAccess.Repositories;
 using VehicleApp.Domain.Models;
 using VehicleApp.Services.Interfaces;
 using VehicleApp.Services.Services;
+
 
 namespace VehicleApp.WebApp
 {
@@ -49,7 +51,12 @@ namespace VehicleApp.WebApp
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddAutoMapper();
-
+            services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
+            {
+                ProgressBar = false,
+                PositionClass = ToastPositions.TopRight,
+                CloseButton = true
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -69,6 +76,7 @@ namespace VehicleApp.WebApp
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseNToastNotify();
 
             app.UseMvc(routes =>
             {

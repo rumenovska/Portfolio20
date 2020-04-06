@@ -1,7 +1,9 @@
 ﻿@model List<VehicleViewModel>
 @{
     ViewData["Title"] = "Vehicles";
+    
 }
+
 
 <style>
     .myTable > tbody > tr > td, .mytable > tbody > tr > th, .myTable > thead > tr > td, .myTable > thead > tr > th {
@@ -97,22 +99,25 @@
                     <div class="opcii_navbar">
                         <div class="opcii_dropdown">
                             <button class="opcii_dropbtn">
-                                Опции
+                                Options
                                 <i class="fa fa-caret-down"></i>
                             </button>
                             <div class="opcii_dropdown-content">
-                                <a asp-controller="Vozilo"
-                                   asp-action="DetaliVozila"
-                                   asp-route-voziloId="@vehicle.Id">Details</a>
-                                <a asp-controller="Nabavka"
-                                   asp-action="DodadiNabavka"
-                                   asp-route-voziloId="@vehicle.Id">Add Order</a>
+                                <a asp-controller="Vehicle"
+                                   asp-action="DetailsVehicle"
+                                   asp-route-vehicleId="@vehicle.Id">Details</a>
+                                <a asp-controller="Order"
+                                   asp-action="AddOrder"
+                                   asp-route-vehicleId="@vehicle.Id">Add Order</a>
+                                <a asp-controller="Vehicle"
+                                   asp-action="RemoveVehicle"
+                                   asp-route-vehicleId="@vehicle.Id">Remove</a>
                                 @*<a asp-controller="Dogovor"
-                                    asp-action="AddDogovor"
-                                    asp-route-voziloId="@vozilo.Id">Додади Договор</a>*@
+        asp-action="AddDogovor"
+        asp-route-voziloId="@vozilo.Id">Додади Договор</a>*@
                                 @*<a asp-controller="Servis"
-                                    asp-action="AddServis"
-                                    asp-route-voziloId="@vozilo.Id">Додади Сервис</a>*@
+        asp-action="AddServis"
+        asp-route-voziloId="@vozilo.Id">Додади Сервис</a>*@
                             </div>
                         </div>
                     </div>

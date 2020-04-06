@@ -40,7 +40,8 @@ namespace VehicleApp.Services.Services
         }
         public int RemoveVehicle(int id)
         {
-            throw new NotImplementedException();
+            Vehicle vehicle = _mapper.Map<Vehicle>(GetVehicleById(id));
+            return _vehicleRepository.Delete(vehicle.Id);
         }
     }
 }

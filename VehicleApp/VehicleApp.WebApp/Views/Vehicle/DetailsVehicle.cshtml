@@ -1,0 +1,85 @@
+﻿@model VehicleViewModel
+@{
+    ViewData["Title"] = "DetailsVehicle";
+}
+
+<br />
+
+<div class="form-row align-items-center">
+    <div class="row">
+
+        <div class="col-md-3">
+            <label>Employee Name</label>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.EmployeeName" readonly>
+        </div>
+
+        <div class="col-md-3">
+            <label>Directorate</label>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.Directorate" readonly>
+        </div>
+
+        <div class="col-md-3">
+            <label>Brand</label>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.Brand" readonly>
+        </div>
+
+        <div class="col-md-3">
+
+            <label>Vehicle Type</label>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.VehicleType" readonly>
+        </div>
+
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-3">
+            <label>Vehicle Registered Number</label>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.VehicleRegisteredNum" readonly>
+        </div>
+
+        <div class="col-md-3">
+            <label>First Registration</label>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.FirstRegistration.ToString("dd/MM/yyyy")" readonly>
+        </div>
+
+        <div class="col-md-3">
+            <label>RegistrationExpiryDate</label>
+            <input  type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.RegistrationExpiryDate.ToString("dd/MM/yyyy")" readonly>
+        </div>
+
+        <div class="col-md-3">
+            <label>Engine Number</label>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.EngineNum" readonly>
+        </div>
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-3">
+            <label>Color</label>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.Color" readonly>
+        </div>
+        <div class="col-md-1">
+            <label asp-for="Malfunction">Malfunction</label>
+            <div class="input-group">
+                <input onclick="return false" asp-for="Malfunction" type="checkbox" />
+            </div>
+        </div>
+        <div class="col-md-1">
+            <label asp-for="Loan">Loan</label>
+            <div class="input-group">
+                <input asp-for="Loan" type="checkbox" onclick="return false" />
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <a class="btn btn-info" asp-controller="Vehicle" asp-action="Vehicles">Back</a>
+    <a class="btn btn-info" asp-controller="Vehicle" asp-action="ChangeVehicle" asp-route-vehicleId="@Model.Id">Change</a>
+
+
+</div>
+
+
+

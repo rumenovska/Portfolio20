@@ -15,7 +15,7 @@ namespace VehicleApp.WebModels
         public string Directorate { get; set; }
         public string EngineNum { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime? FirstRegistration { get; set; }
+        public DateTime FirstRegistration { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime RegistrationExpiryDate { get; set; }
         public bool Malfunction { get; set; }

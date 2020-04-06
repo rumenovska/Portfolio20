@@ -38,7 +38,14 @@ namespace VehicleApp.DataAccess.Repositories
 
         public int Delete(int id)
         {
-            throw new NotImplementedException();
+
+            var vehicle = _context.Vehicles.FirstOrDefault(v => v.Id == id);
+
+            if (vehicle == null)
+                return -1;
+
+            _context.Remove(vehicle);
+            return _context.SaveChanges();
         }
     }
 }
