@@ -39,8 +39,18 @@ namespace VehicleApp.WebApp.Controllers
         [HttpPost]
         public IActionResult AddVehicle(VehicleViewModel model)
         {
-            
-            _vehicleService.CreateVehicle(model);
+
+            var result = _vehicleService.CreateVehicle(model);
+            if(result >= 0)
+            {
+                var message = "The Vehicle Was Successfully Added!";
+                _toastNotification.AddSuccessToastMessage(message);
+            }
+            else
+            {
+                var message = "Something went wrong while adding vehicle";
+                _toastNotification.AddErrorToastMessage(message);
+            }
             return RedirectToAction("Vehicles", "Vehicle");
         }
 
@@ -60,6 +70,8 @@ namespace VehicleApp.WebApp.Controllers
         {
             
             _vehicleService.UpdateVehicle(model);
+            var message = "The Vehicle Was Successfully Updated!";
+            _toastNotification.AddSuccessToastMessage(message);
            return RedirectToAction("Vehicles", "Vehicle");
          
         }
@@ -73,6 +85,8 @@ namespace VehicleApp.WebApp.Controllers
         {
 
             _vehicleService.RemoveVehicle(model.Id);
+            var message = $"Vehicle is permanently removed!";
+            _toastNotification.AddSuccessToastMessage(message);
             return RedirectToAction("Vehicles", "Vehicle");
 
         }

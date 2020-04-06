@@ -68,6 +68,7 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
+    @await Component.InvokeAsync("NToastNotify")
 
     @RenderSection("Scripts", required: false)
 </body>
