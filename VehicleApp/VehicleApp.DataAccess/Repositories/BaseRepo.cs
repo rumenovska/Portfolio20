@@ -4,7 +4,7 @@ using System.Text;
 
 namespace VehicleApp.DataAccess.Repositories
 {
-    public class BaseRepo
+    public abstract class BaseRepo
     {
         protected readonly VehicleAppDbContext _context;
         public BaseRepo(VehicleAppDbContext context)

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -43,13 +44,21 @@ namespace VehicleApp.WebApp
 
             services.AddDbContext<VehicleAppDbContext>(opts => opts
                .UseSqlServer(Configuration.GetConnectionString("VehicleConnectionString")));
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = false;
+                options.Password.RequireNonAlphanumeric = false;
+
+            });
             services.AddTransient<IRepository<Vehicle>, VehicleRepo>();
             services.AddTransient<IRepository<Order>, OrderRepo>();
             services.AddTransient<IRepository<Product>, ProductRepo>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddTransient<IVehicleService, VehicleService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddAutoMapper();
             services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
             {

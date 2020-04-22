@@ -125,7 +125,7 @@
                 <td>@vehicle.EmployeeName</td>
                 <td>@vehicle.Directorate</td>
                 <td>@vehicle.VehicleRegisteredNum</td>
-                @if (vehicle.DisplayDate == "Vehicle Registration Expired")
+                @if (vehicle.IsExpiredRegistration(vehicle.RegistrationExpiryDate))
                 {
                     <td>@vehicle.DisplayDate</td>
                 }

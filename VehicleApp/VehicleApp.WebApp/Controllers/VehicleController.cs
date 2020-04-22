@@ -21,13 +21,8 @@ namespace VehicleApp.WebApp.Controllers
         public IActionResult Vehicles()
         {
             var vehicles = _vehicleService.GetAllVehicles();
-            foreach (var v in vehicles)
-            {
-                if (v.RegistrationExpiryDate == null || v.RegistrationExpiryDate < DateTime.Now)
-                {
-                    v.DisplayDate = "Vehicle Registration Expired";
-                }
-            }
+           
+           
             return View(vehicles);
         }
         

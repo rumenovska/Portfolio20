@@ -23,5 +23,16 @@ namespace VehicleApp.WebModels
         public string EmployeeName { get; set; }
         public string DisplayDate { get; set; }
         public virtual IEnumerable<OrderViewModel> Orders { get; set; }
+
+        public bool IsExpiredRegistration(DateTime regExpireDate)
+        {
+                if (regExpireDate == null || regExpireDate < DateTime.Now)
+                {
+                    DisplayDate = "Vehicle Registration Expired";
+                    return true;
+                }
+
+            return false;
+        }
     }
 }

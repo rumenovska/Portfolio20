@@ -12,5 +12,6 @@ namespace VehicleApp.Services.Interfaces
         int CreateVehicle(VehicleViewModel vehicle);
         int UpdateVehicle(VehicleViewModel vehicle);
         int RemoveVehicle(int id);
+        
     }
 }

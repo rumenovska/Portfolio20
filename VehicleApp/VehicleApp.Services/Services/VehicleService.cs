@@ -43,5 +43,7 @@ namespace VehicleApp.Services.Services
             Vehicle vehicle = _mapper.Map<Vehicle>(GetVehicleById(id));
             return _vehicleRepository.Delete(vehicle.Id);
         }
+
+       
     }
 }
