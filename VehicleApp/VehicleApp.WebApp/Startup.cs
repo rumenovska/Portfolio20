@@ -91,7 +91,7 @@ namespace VehicleApp.WebApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Vehicle}/{action=Vehicles}/{id?}");
+                    template: "{controller=home}/{action=index}/{id?}");
             });
         }
     }

@@ -17,14 +17,14 @@ namespace VehicleApp.WebApp.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Welcome To Vehicle App";
 
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Email: vehicle_app@gmail.com";
 
             return View();
         }

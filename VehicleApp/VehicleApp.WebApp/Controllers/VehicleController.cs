@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using VehicleApp.Services.Interfaces;
@@ -76,6 +77,7 @@ namespace VehicleApp.WebApp.Controllers
             return View(vehicle);
         }
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult RemoveVehicle(VehicleViewModel model)
         {
 
