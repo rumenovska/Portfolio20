@@ -49,7 +49,7 @@ namespace VehicleApp.WebApp
                 options.User.RequireUniqueEmail = false;
                 options.Password.RequireNonAlphanumeric = false;
 
-            });
+            }).AddEntityFrameworkStores<VehicleAppDbContext>();
             services.AddTransient<IRepository<Vehicle>, VehicleRepo>();
             services.AddTransient<IRepository<Order>, OrderRepo>();
             services.AddTransient<IRepository<Product>, ProductRepo>();
@@ -86,7 +86,7 @@ namespace VehicleApp.WebApp
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseNToastNotify();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
