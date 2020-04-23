@@ -16,13 +16,13 @@ namespace VehicleApp.DataAccess.Repositories
         public IEnumerable<Order> GetAll()
         {
             return _context.Orders
-                .Include(o => o.Products);
+                .Include(o => o.OrderProdutcs);
         }
 
         public Order GetById(int id)
         {
             return _context.Orders
-                .Include(o => o.Products)
+                .Include(o => o.OrderProdutcs)
                 .FirstOrDefault(o => o.Id == id);
         }
 

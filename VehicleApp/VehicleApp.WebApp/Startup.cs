@@ -12,8 +12,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NToastNotify;
 using VehicleApp.DataAccess;
+using VehicleApp.DataAccess.IdentityData;
 using VehicleApp.DataAccess.Interfaces;
 using VehicleApp.DataAccess.Repositories;
 using VehicleApp.Domain.Models;
@@ -42,9 +44,10 @@ namespace VehicleApp.WebApp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<VehicleAppDbContext>(opts => opts
-               .UseSqlServer(Configuration.GetConnectionString("VehicleConnectionString")));
-            services.AddIdentity<User, IdentityRole>(options =>
+            //services.AddDbContext<VehicleAppDbContext>(opts => opts
+            //   .UseSqlServer(Configuration.GetConnectionString("VehicleConnectionString")));
+
+            services.AddIdentity<MyIdentityUser, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -53,12 +56,10 @@ namespace VehicleApp.WebApp
             services.AddTransient<IRepository<Vehicle>, VehicleRepo>();
             services.AddTransient<IRepository<Order>, OrderRepo>();
             services.AddTransient<IRepository<Product>, ProductRepo>();
-            services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddTransient<IVehicleService, VehicleService>();
             services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IProductService, ProductService>();
-            services.AddTransient<IUserService, UserService>();
             services.AddAutoMapper();
             services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
             {
@@ -66,7 +67,29 @@ namespace VehicleApp.WebApp
                 PositionClass = ToastPositions.TopRight,
                 CloseButton = true
             });
+
+            if (Configuration.GetValue<bool>("UseInMemoryDatabase"))
+            {
+                // use an in memory database instead of a real sql database
+                services.AddDbContext<VehicleIdentityDbContext>(builder => builder.UseInMemoryDatabase("VehiclesDatabase"));
+            }
+
+
+            services.AddIdentity<MyIdentityUser, MyIdentityRole>()
+                .AddEntityFrameworkStores<VehicleIdentityDbContext>()
+                .AddUserStore<MyIdentityUserStore>()
+                .AddDefaultTokenProviders();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            if (Configuration.GetValue<bool>("SeedDatabase"))
+            {
+                var serviceProvider = services.BuildServiceProvider();
+                var context = serviceProvider.GetService<VehicleAppDbContext>();
+                var roleManager = serviceProvider.GetService<RoleManager<MyIdentityRole>>();
+                var userManager = serviceProvider.GetService<UserManager<MyIdentityUser>>();
+                DataInitializer.SeedData(context, roleManager, userManager);
+            }
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,9 +104,10 @@ namespace VehicleApp.WebApp
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+            
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseHttpsRedirection();
             app.UseCookiePolicy();
             app.UseNToastNotify();
             app.UseAuthentication();
@@ -93,6 +117,8 @@ namespace VehicleApp.WebApp
                     name: "default",
                     template: "{controller=home}/{action=index}/{id?}");
             });
+
+
         }
     }
 }

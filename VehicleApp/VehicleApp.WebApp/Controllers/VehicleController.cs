@@ -78,7 +78,7 @@ namespace VehicleApp.WebApp.Controllers
             return View(vehicle);
         }
         [HttpPost]
-        [Authorize(Roles = "admin")]
+        [Authorize(Roles = "Manager")]
         public IActionResult RemoveVehicle(VehicleViewModel model)
         {
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,13 +14,17 @@ namespace VehicleApp.DataAccess.Repositories
 
         public IEnumerable<Product> GetAll()
         {
-            return _context.Products;
+            return _context.Products
+                .Include(p => p.OrderProdutcs);
                 
         }
 
         public Product GetById(int id)
         {
-            return _context.Products.FirstOrDefault(p => p.Id == id);
+            return _context.Products
+                .Include(p=> p.OrderProdutcs)
+                .FirstOrDefault(p => p.Id == id);
+                
         }
 
         public int Insert(Product entity)

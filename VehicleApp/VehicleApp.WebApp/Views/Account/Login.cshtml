@@ -1,0 +1,36 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+<script src="~/Scripts/jquery.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js">
+</script>
+
+<h1>𝕃𝕠𝕘 𝕀𝕟</h1>
+<form asp-controller="Account" asp-action="Login" method="post">
+    <table>
+        <tr>
+            <td><label asp-for="UserName"></label></td>
+            <td><input asp-for="UserName" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Password"></label></td>
+            <td><input asp-for="Password" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="RememberMe"></label></td>
+            <td><input asp-for="RememberMe" /></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit"
+                       value="Register" />
+            </td>
+        </tr>
+    </table>
+    <div asp-validation-summary="All"></div>
+</form>
+

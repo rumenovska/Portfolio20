@@ -6,20 +6,18 @@ using System.Text;
 
 namespace VehicleApp.Domain.Models
 {
-    public class Product
+    public class OrderProdutcs
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
-        public string ProductName { get; set; }
-        [Required]
-        public int Quantity { get; set; }
-        [Required]
-        public int Price { get; set; }
-        
-        public int Total { get; set; }
 
-        public virtual List<OrderProdutcs> OrderProdutcs { get; set; }
+        public int ProductId { get; set; }
+
+        public virtual Product Product { get; set; }
+
+        public int OrderId { get; set; }
+
+        public virtual Order Order { get; set; }
     }
 }

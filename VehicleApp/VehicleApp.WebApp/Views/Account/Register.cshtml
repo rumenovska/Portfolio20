@@ -1,0 +1,48 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+<script src="~/Scripts/jquery.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js">
+</script>
+
+<h1>ℂ𝕣𝕖𝕒𝕥𝕖 𝔸𝕟 𝔼𝕞𝕡𝕝𝕠𝕪𝕖𝕖 𝔸𝕔𝕔𝕠𝕦𝕟𝕥</h1>
+<form asp-controller="Account" asp-action="Register" method="post">
+    <table>
+        <tr>
+            <td><label asp-for="UserName"></label></td>
+            <td><input asp-for="UserName" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Password"></label></td>
+            <td><input asp-for="Password" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="ConfirmPassword"></label></td>
+            <td><input asp-for="ConfirmPassword" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="Email"></label></td>
+            <td><input asp-for="Email" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="FullName"></label></td>
+            <td><input asp-for="FullName" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="BirthDate"></label></td>
+            <td><input asp-for="BirthDate" /></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit"
+                       value="Register" />
+            </td>
+        </tr>
+    </table>
+    <div asp-validation-summary="All"></div>
+</form>
+
