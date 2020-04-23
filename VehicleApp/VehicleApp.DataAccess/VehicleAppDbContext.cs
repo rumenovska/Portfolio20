@@ -31,13 +31,21 @@ namespace VehicleApp.DataAccess
 
             // ADMIN ROLE ID
             string managerId = Guid.NewGuid().ToString();
+            string userRoleId = Guid.NewGuid().ToString();
 
             modelBuilder.Entity<IdentityRole>().HasData(
             new IdentityRole
+                {
+                    Id = managerId,
+                    Name = "admin",
+                    NormalizedName = "ADMIN"
+                }, 
+            new IdentityRole
             {
-                Id = managerId,
-                Name = "admin",
-                NormalizedName = "ADMIN"
+                Id = userRoleId,
+                Name = "user",
+                NormalizedName = "USER"
+
             });
 
             var hasher = new PasswordHasher<User>();
@@ -54,6 +62,12 @@ namespace VehicleApp.DataAccess
                 SecurityStamp = string.Empty
             });
 
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = managerId,
+                UserId = userRoleId
+
+            });
         }
     }
 }

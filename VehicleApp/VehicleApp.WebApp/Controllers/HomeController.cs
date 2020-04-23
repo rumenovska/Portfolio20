@@ -17,7 +17,7 @@ namespace VehicleApp.WebApp.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Welcome To Vehicle App";
+            ViewData["Message"] = "𝕎𝕖𝕝𝕔𝕠𝕞𝕖 𝕋𝕠 𝕍𝕖𝕙𝕚𝕔𝕝𝕖 𝔸𝕡𝕡";
 
             return View();
         }

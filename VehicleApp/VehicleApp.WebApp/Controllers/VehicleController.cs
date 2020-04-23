@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
 using VehicleApp.Services.Interfaces;
+using VehicleApp.WebApp.ViewModels;
 using VehicleApp.WebModels;
 
 namespace VehicleApp.WebApp.Controllers
@@ -22,11 +23,11 @@ namespace VehicleApp.WebApp.Controllers
         public IActionResult Vehicles()
         {
             var vehicles = _vehicleService.GetAllVehicles();
-           
-           
+
+
             return View(vehicles);
         }
-        
+
 
         public IActionResult AddVehicle()
         {
@@ -37,7 +38,7 @@ namespace VehicleApp.WebApp.Controllers
         {
 
             var result = _vehicleService.CreateVehicle(model);
-            if(result >= 0)
+            if (result >= 0)
             {
                 var message = "The Vehicle Was Successfully Added!";
                 _toastNotification.AddSuccessToastMessage(message);
@@ -64,12 +65,12 @@ namespace VehicleApp.WebApp.Controllers
         [HttpPost]
         public IActionResult ChangeVehicle(VehicleViewModel model)
         {
-            
+
             _vehicleService.UpdateVehicle(model);
             var message = "The Vehicle Was Successfully Updated!";
             _toastNotification.AddSuccessToastMessage(message);
-           return RedirectToAction("Vehicles", "Vehicle");
-         
+            return RedirectToAction("Vehicles", "Vehicle");
+
         }
         public IActionResult RemoveVehicle(int vehicleId)
         {
@@ -87,5 +88,17 @@ namespace VehicleApp.WebApp.Controllers
             return RedirectToAction("Vehicles", "Vehicle");
 
         }
+
+        //[HttpGet("/vehicles/{vehicleId:min(1)/expense}/expense")]
+        //public IActionResult CreateExpenseForVehicle(int vehicleId)
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost("/vehicles/{vehicleId:min(1)/expense}/expense")]
+        //public IActionResult CreateExpenseForVehicle(int vehicleId, CreateExpenseForVehicleRequest model)
+        //{
+        //    return View();
+        //}
     }
 }
