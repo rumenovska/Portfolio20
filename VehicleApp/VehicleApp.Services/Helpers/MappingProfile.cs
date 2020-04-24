@@ -20,10 +20,9 @@ namespace VehicleApp.Services.Helpers
                 .ForMember(dest => dest.Expenses, src => src.MapFrom(x => x.Expenses))
                 .ReverseMap();
 
-            CreateMap<Expenses, ExpenseViewModel>()
+            CreateMap<Expense, ExpenceViewModel>()
                 .ForMember(dest => dest.Product, src => src.MapFrom(x => x.Product))
                 .ForMember(dest => dest.Vehicle, src => src.MapFrom(x => x.Vehicle))
-                .ForMember(dest => dest.TotalCost, src => src.Ignore())
                 .ReverseMap();
         }
     }

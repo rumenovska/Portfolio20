@@ -8,19 +8,19 @@ using VehicleApp.Domain.Models;
 
 namespace VehicleApp.DataAccess.Repositories
 {
-    public class ExpencesRepo : BaseRepo, IRepository<Expenses>
+    public class ExpenceRepo : BaseRepo, IRepository<Expense>
     {
-        public ExpencesRepo(VehicleAppDbContext context) : base(context) { }
+        public ExpenceRepo(VehicleAppDbContext context) : base(context) { }
        
 
-        public IEnumerable<Expenses> GetAll()
+        public IEnumerable<Expense> GetAll()
         {
             return _context.Expenses
                 .Include(e => e.Vehicle)
                 .Include(e => e.Product);
         }
 
-        public Expenses GetById(int id)
+        public Expense GetById(int id)
         {
             //return _context.Expenses
             //    .Include(e => e.Vehicle)
@@ -30,13 +30,13 @@ namespace VehicleApp.DataAccess.Repositories
             return GetAll().FirstOrDefault(e => e.Id == id);
         }
 
-        public int Insert(Expenses entity)
+        public int Insert(Expense entity)
         {
             _context.Add(entity);
             return _context.SaveChanges();
         }
 
-        public int Update(Expenses entity)
+        public int Update(Expense entity)
         {
             _context.Update(entity);
             return _context.SaveChanges();
@@ -44,7 +44,7 @@ namespace VehicleApp.DataAccess.Repositories
 
         public int Delete(int id)
         {
-            Expenses expense = GetById(id);
+            Expense expense = GetById(id);
             if(expense != null)
             {
                 _context.Remove(expense);

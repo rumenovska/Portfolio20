@@ -54,7 +54,7 @@ namespace VehicleApp.WebApp
 
             }).AddEntityFrameworkStores<VehicleAppDbContext>();
             services.AddTransient<IRepository<Vehicle>, VehicleRepo>();
-            services.AddTransient<IRepository<Expenses>, ExpencesRepo>();
+            services.AddTransient<IRepository<Expense>, ExpenceRepo>();
             services.AddTransient<IRepository<Product>, ProductRepo>();
 
             services.AddTransient<IVehicleService, VehicleService>();

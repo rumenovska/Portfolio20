@@ -23,9 +23,7 @@ namespace VehicleApp.WebModels
         public bool Loan { get; set; }
         public string EmployeeName { get; set; }
         public string DisplayDate { get; set; }
-        public int ExpenceId { get; set; }
-        public virtual Expenses Expence { get; set; }
-        public virtual List<Expenses> Expenses { get; set; }
+        public virtual List<Expense> Expenses { get; set; }
 
         public bool IsExpiredRegistration(DateTime regExpireDate)
         {

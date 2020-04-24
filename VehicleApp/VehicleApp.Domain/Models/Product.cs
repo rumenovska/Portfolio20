@@ -16,9 +16,8 @@ namespace VehicleApp.Domain.Models
 
         [Required]
         public string Description { get; set; }
-        public int ExpenceId { get; set; }
-        public virtual Expenses Expence { get; set; }
-        public virtual List<Expenses> Expenses { get; set; }
+        
+        public virtual List<Expense> Expenses { get; set; }
 
     }
 }

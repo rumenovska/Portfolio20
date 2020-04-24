@@ -7,10 +7,10 @@ namespace VehicleApp.Services.Interfaces
 {
     public interface IExpenceService
     {
-        IEnumerable<ExpenseViewModel> GetAllExpences();
-        ExpenseViewModel GetExpenceById(int id);
-        int CreateExpence(ExpenseViewModel expence);
-        int UpdateExpence(ExpenseViewModel expence);
-        int RemoveExpence(int id);
+        VehicleExpencesViewModel GetAllExpencesForVehicle(int vehicleId);
+        //ExpenceViewModel GetExpenceById(int id);
+        //int CreateExpence(ExpenceViewModel expence);
+        //int UpdateExpence(ExpenceViewModel expence);
+        //int RemoveExpence(int id);
     }
 }

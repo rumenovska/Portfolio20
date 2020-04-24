@@ -8,8 +8,6 @@ namespace VehicleApp.WebModels
         public int Id { get; set; }
         public string ProductName { get; set; }
         public string Description { get; set; }
-        public int ExpenceId { get; set; }
-        public virtual Expenses Expence { get; set; }
-        public virtual List<Expenses> Expenses { get; set; }
+        public virtual List<Expense> Expenses { get; set; }
     }
 }
