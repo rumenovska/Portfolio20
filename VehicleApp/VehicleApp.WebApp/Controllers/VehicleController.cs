@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify;
+using VehicleApp.Domain.Constants;
 using VehicleApp.Services.Interfaces;
 using VehicleApp.WebApp.ViewModels;
 using VehicleApp.WebModels;
@@ -20,7 +21,8 @@ namespace VehicleApp.WebApp.Controllers
             _vehicleService = vehicleService;
             _toastNotification = toastNotification;
         }
-        [Authorize(Roles = "EmployeeUser, Manager")]
+
+        [Authorize(Roles = Roles.ManagerAndEmployee)]
         public IActionResult Vehicles()
         {
             var vehicles = _vehicleService.GetAllVehicles();
@@ -29,11 +31,13 @@ namespace VehicleApp.WebApp.Controllers
             return View(vehicles);
         }
 
-        [Authorize(Roles = "EmployeeUser")]
+        [Authorize]
         public IActionResult AddVehicle()
         {
             return View();
         }
+
+        [Authorize]
         [HttpPost]
         public IActionResult AddVehicle(VehicleViewModel model)
         {
@@ -51,19 +55,23 @@ namespace VehicleApp.WebApp.Controllers
             }
             return RedirectToAction("Vehicles", "Vehicle");
         }
-        [Authorize(Roles = "EmployeeUser")]
+
+        [Authorize]
         public IActionResult DetailsVehicle(int vehicleId)
         {
 
             var vehicle = _vehicleService.GetVehicleById(vehicleId);
             return View(vehicle);
         }
-        [Authorize(Roles = "EmployeeUser")]
+
+        [Authorize(Roles = Roles.Manager)]
         public IActionResult ChangeVehicle(int vehicleId)
         {
             var vehicle = _vehicleService.GetVehicleById(vehicleId);
             return View(vehicle);
         }
+
+        [Authorize(Roles = Roles.Manager)]
         [HttpPost]
         public IActionResult ChangeVehicle(VehicleViewModel model)
         {
@@ -74,12 +82,15 @@ namespace VehicleApp.WebApp.Controllers
             return RedirectToAction("Vehicles", "Vehicle");
 
         }
-        [Authorize(Roles = "Manager")]
+        [Authorize(Roles = Roles.Manager)]
+
         public IActionResult RemoveVehicle(int vehicleId)
         {
             var vehicle = _vehicleService.GetVehicleById(vehicleId);
             return View(vehicle);
         }
+
+        [Authorize(Roles = Roles.Manager)]
         [HttpPost]
         public IActionResult RemoveVehicle(VehicleViewModel model)
         {

@@ -8,5 +8,6 @@ namespace VehicleApp.Domain.Constants
     {
         public const string Employee = "EmployeeUser";
         public const string Manager = "Manager";
+        public const string ManagerAndEmployee = "EmployeeUser, Manager";
     }
 }
