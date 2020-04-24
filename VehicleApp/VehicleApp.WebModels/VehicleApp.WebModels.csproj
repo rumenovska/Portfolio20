@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VehicleApp.DataAccess\VehicleApp.DataAccess.csproj" />
+    <ProjectReference Include="..\VehicleApp.Domain\VehicleApp.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

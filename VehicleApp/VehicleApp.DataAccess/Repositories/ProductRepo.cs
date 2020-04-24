@@ -15,14 +15,14 @@ namespace VehicleApp.DataAccess.Repositories
         public IEnumerable<Product> GetAll()
         {
             return _context.Products
-                .Include(p => p.OrderProdutcs);
+                .Include(p => p.Expenses);
                 
         }
 
         public Product GetById(int id)
         {
             return _context.Products
-                .Include(p=> p.OrderProdutcs)
+                .Include(p=> p.Expenses)
                 .FirstOrDefault(p => p.Id == id);
                 
         }

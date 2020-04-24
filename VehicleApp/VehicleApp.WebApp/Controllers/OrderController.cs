@@ -11,10 +11,10 @@ namespace VehicleApp.WebApp.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly IOrderService _orderService;
+        private readonly IExpenceService _orderService;
         private readonly IProductService _productService;
         private readonly IToastNotification _toastNotification;
-        public OrderController(IOrderService orderService, IProductService productService, IToastNotification toastNotification)
+        public OrderController(IExpenceService orderService, IProductService productService, IToastNotification toastNotification)
         {
             _orderService = orderService;
             _productService = productService;

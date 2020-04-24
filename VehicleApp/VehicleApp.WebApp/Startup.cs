@@ -54,11 +54,11 @@ namespace VehicleApp.WebApp
 
             }).AddEntityFrameworkStores<VehicleAppDbContext>();
             services.AddTransient<IRepository<Vehicle>, VehicleRepo>();
-            services.AddTransient<IRepository<Order>, OrderRepo>();
+            services.AddTransient<IRepository<Expenses>, ExpencesRepo>();
             services.AddTransient<IRepository<Product>, ProductRepo>();
 
             services.AddTransient<IVehicleService, VehicleService>();
-            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IExpenceService, ExpenceService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddAutoMapper();
             services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()

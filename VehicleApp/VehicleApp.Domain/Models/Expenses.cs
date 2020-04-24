@@ -6,23 +6,27 @@ using System.Text;
 
 namespace VehicleApp.Domain.Models
 {
-    public class Order
+    public class Expenses
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
-        public string OrderType { get; set; }
+        public int Cost { get; set; }
         [Required]
-        public string Description { get; set; }
+        public string CostDescription { get; set; }
         [Required]
-        public DateTime DateOfOrder { get; set; }
-        [Required]
-        public int TotalOrder { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime CreatedDate { get; set; }
+        public int ProductId { get; set; }
+
+        public virtual List<Product> Products { get; set; }
 
         public int VehicleId { get; set; }
-        public virtual Vehicle Vehicle { get; set; }
 
-        public virtual List<OrderProdutcs> OrderProdutcs { get; set; }
+        public virtual List<Vehicle> Vehicles { get; set; }
+        
+
+
     }
 }

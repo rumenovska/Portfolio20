@@ -13,13 +13,12 @@ namespace VehicleApp.Domain.Models
         public int Id { get; set; }
         [Required]
         public string ProductName { get; set; }
-        [Required]
-        public int Quantity { get; set; }
-        [Required]
-        public int Price { get; set; }
-        
-        public int Total { get; set; }
 
-        public virtual List<OrderProdutcs> OrderProdutcs { get; set; }
+        [Required]
+        public string Description { get; set; }
+        public int ExpenceId { get; set; }
+        public virtual Expenses Expence { get; set; }
+        public virtual List<Expenses> Expenses { get; set; }
+
     }
 }

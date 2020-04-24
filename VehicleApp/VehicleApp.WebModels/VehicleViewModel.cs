@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using VehicleApp.Domain.Models;
 
 namespace VehicleApp.WebModels
 {
@@ -22,7 +23,9 @@ namespace VehicleApp.WebModels
         public bool Loan { get; set; }
         public string EmployeeName { get; set; }
         public string DisplayDate { get; set; }
-        public virtual IEnumerable<OrderViewModel> Orders { get; set; }
+        public int ExpenceId { get; set; }
+        public virtual Expenses Expence { get; set; }
+        public virtual List<Expenses> Expenses { get; set; }
 
         public bool IsExpiredRegistration(DateTime regExpireDate)
         {
