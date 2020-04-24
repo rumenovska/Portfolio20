@@ -9,7 +9,7 @@ using VehicleApp.Domain.Models;
 
 namespace VehicleApp.DataAccess
 {
-    public class VehicleAppDbContext : VehicleIdentityDbContext
+    public class VehicleAppDbContext : IdentityDbContext<MyIdentityUser, MyIdentityRole, string>
     {
         public VehicleAppDbContext(DbContextOptions<VehicleAppDbContext> options) : base(options) { }
 

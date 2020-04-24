@@ -47,12 +47,7 @@ namespace VehicleApp.WebApp
             //services.AddDbContext<VehicleAppDbContext>(opts => opts
             //   .UseSqlServer(Configuration.GetConnectionString("VehicleConnectionString")));
 
-            services.AddIdentity<MyIdentityUser, IdentityRole>(options =>
-            {
-                options.User.RequireUniqueEmail = false;
-                options.Password.RequireNonAlphanumeric = false;
-
-            }).AddEntityFrameworkStores<VehicleAppDbContext>();
+           
             services.AddTransient<IDataInitializer, DataInitializer>();
             services.AddTransient<IRepository<Vehicle>, VehicleRepo>();
             services.AddTransient<IRepository<Expense>, ExpenceRepo>();
@@ -72,18 +67,18 @@ namespace VehicleApp.WebApp
             if (Configuration.GetValue<bool>("UseInMemoryDatabase"))
             {
                 // use an in memory database instead of a real sql database
-                services.AddDbContext<VehicleIdentityDbContext>(builder => builder.UseInMemoryDatabase("VehiclesDatabase"));
+                services.AddDbContext<VehicleAppDbContext>(builder => builder.UseInMemoryDatabase("VehiclesDatabase"));
             }
 
 
             services.AddIdentity<MyIdentityUser, MyIdentityRole>()
-                .AddEntityFrameworkStores<VehicleIdentityDbContext>()
+                .AddEntityFrameworkStores<VehicleAppDbContext>()
                 .AddDefaultTokenProviders();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDataInitializer dataInitializer)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -97,7 +92,11 @@ namespace VehicleApp.WebApp
 
             if (Configuration.GetValue<bool>("SeedDatabase"))
             {
-                dataInitializer.InitializeData();
+                using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+                {
+                    var dataInitializer = scope.ServiceProvider.GetRequiredService<IDataInitializer>();
+                    dataInitializer.InitializeData();
+                }
             }
 
 
