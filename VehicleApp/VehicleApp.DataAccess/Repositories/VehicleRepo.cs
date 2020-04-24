@@ -16,12 +16,12 @@ namespace VehicleApp.DataAccess.Repositories
         public IEnumerable<Vehicle> GetAll()
         {
             return _context.Vehicles
-                .Include(v => v.Orders);
+                .Include(v => v.Expenses);
         }
 
         public Vehicle GetById(int id)
         {
-            return _context.Vehicles.Include(v=> v.Orders).FirstOrDefault(v => v.Id == id);
+            return _context.Vehicles.Include(v=> v.Expenses).FirstOrDefault(v => v.Id == id);
         }
 
         public int Insert(Vehicle entity)
