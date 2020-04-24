@@ -20,16 +20,5 @@ namespace VehicleApp.WebApp.Controllers
             _productService = productService;
             _toastNotification = toastNotification;
         }
-        public IActionResult AddOrder()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult AddOrder(OrderViewModel orderModel)
-        {
-            _orderService.CreateOrder(orderModel);
-      
-            return RedirectToAction("vehicles", "vehicle");
-        }
     }
 }

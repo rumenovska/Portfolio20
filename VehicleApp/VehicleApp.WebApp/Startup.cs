@@ -53,6 +53,7 @@ namespace VehicleApp.WebApp
                 options.Password.RequireNonAlphanumeric = false;
 
             }).AddEntityFrameworkStores<VehicleAppDbContext>();
+            services.AddTransient<IDataInitializer, DataInitializer>();
             services.AddTransient<IRepository<Vehicle>, VehicleRepo>();
             services.AddTransient<IRepository<Expense>, ExpenceRepo>();
             services.AddTransient<IRepository<Product>, ProductRepo>();
@@ -77,23 +78,12 @@ namespace VehicleApp.WebApp
 
             services.AddIdentity<MyIdentityUser, MyIdentityRole>()
                 .AddEntityFrameworkStores<VehicleIdentityDbContext>()
-                .AddUserStore<MyIdentityUserStore>()
                 .AddDefaultTokenProviders();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            if (Configuration.GetValue<bool>("SeedDatabase"))
-            {
-                var serviceProvider = services.BuildServiceProvider();
-                var context = serviceProvider.GetService<VehicleAppDbContext>();
-                var roleManager = serviceProvider.GetService<RoleManager<MyIdentityRole>>();
-                var userManager = serviceProvider.GetService<UserManager<MyIdentityUser>>();
-                DataInitializer.SeedData(context, roleManager, userManager);
-            }
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDataInitializer dataInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -104,7 +94,12 @@ namespace VehicleApp.WebApp
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
-            
+
+            if (Configuration.GetValue<bool>("SeedDatabase"))
+            {
+                dataInitializer.InitializeData();
+            }
+
 
             app.UseStaticFiles();
             app.UseHttpsRedirection();

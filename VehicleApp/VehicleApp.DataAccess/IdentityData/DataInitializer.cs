@@ -4,35 +4,57 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
+using VehicleApp.DataAccess.Interfaces;
 using VehicleApp.Domain.Models;
 
 namespace VehicleApp.DataAccess.IdentityData
 {
-    public class DataInitializer
+    public class DataInitializer : IDataInitializer
     {
+        private readonly RoleManager<MyIdentityRole> roleManager;
+        private readonly UserManager<MyIdentityUser> userManager;
+        private readonly VehicleAppDbContext context;
 
-        public static void SeedRoles(UserManager<MyIdentityUser> userManager, RoleManager<MyIdentityRole> roleManager)
+        public DataInitializer(RoleManager<MyIdentityRole> roleManager, UserManager<MyIdentityUser> userManager, VehicleAppDbContext context)
+        {
+            this.roleManager = roleManager;
+            this.userManager = userManager;
+            this.context = context;
+        }
+
+        public void InitializeData()
+        {
+            SeedRoles();
+            SeedUsers();
+            SeedProducts();
+        }
+
+        private void SeedRoles()
         {
             if (!roleManager.RoleExistsAsync("EmployeeUser").Result)
             {
-                MyIdentityRole role = new MyIdentityRole();
-                role.Name = "EmployeeUser";
-                role.Description = "Perform normal operations.";
-                IdentityResult roleResult = roleManager.
+                MyIdentityRole role = new MyIdentityRole
+                {
+                    Name = "EmployeeUser",
+                    Description = "Perform normal operations."
+                };
+                _ = roleManager.
                 CreateAsync(role).Result;
             }
 
             if (!roleManager.RoleExistsAsync("Manager").Result)
             {
-                MyIdentityRole role = new MyIdentityRole();
-                role.Name = "Manager";
-                role.Description = "Perform all the operations.";
-                IdentityResult roleResult = roleManager.
+                MyIdentityRole role = new MyIdentityRole
+                {
+                    Name = "Manager",
+                    Description = "Perform all the operations."
+                };
+                _ = roleManager.
                 CreateAsync(role).Result;
             }
         }
 
-        public static void SeedUsers(UserManager<MyIdentityUser> userManager)
+        private void SeedUsers()
         {
             if (userManager.FindByNameAsync("rumenov").Result == null)
             {
@@ -68,15 +90,7 @@ namespace VehicleApp.DataAccess.IdentityData
             }
         }
 
-        public static void SeedData(VehicleAppDbContext context, RoleManager<MyIdentityRole> roleManager, UserManager<MyIdentityUser> userManager)
-        {
-
-            SeedRoles(userManager, roleManager);
-            SeedUsers(userManager);
-            SeedProducts(context);
-        }
-
-        public static void SeedProducts(VehicleAppDbContext dbContext)
+        private void SeedProducts()
         {
             //if (dbContext.Products.FirstOrDefault(p => p.ProductName == "Gorivo") == null)
             //{
@@ -84,7 +98,7 @@ namespace VehicleApp.DataAccess.IdentityData
             //    {
             //        ProductName = "Gorivo",
             //}
-                  //}
+            //}
         }
     }
 }
