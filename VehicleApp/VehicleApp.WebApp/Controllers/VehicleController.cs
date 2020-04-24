@@ -20,6 +20,7 @@ namespace VehicleApp.WebApp.Controllers
             _vehicleService = vehicleService;
             _toastNotification = toastNotification;
         }
+        [Authorize(Roles = "EmployeeUser, Manager")]
         public IActionResult Vehicles()
         {
             var vehicles = _vehicleService.GetAllVehicles();
@@ -28,7 +29,7 @@ namespace VehicleApp.WebApp.Controllers
             return View(vehicles);
         }
 
-
+        [Authorize(Roles = "EmployeeUser")]
         public IActionResult AddVehicle()
         {
             return View();
@@ -50,13 +51,14 @@ namespace VehicleApp.WebApp.Controllers
             }
             return RedirectToAction("Vehicles", "Vehicle");
         }
-
+        [Authorize(Roles = "EmployeeUser")]
         public IActionResult DetailsVehicle(int vehicleId)
         {
 
             var vehicle = _vehicleService.GetVehicleById(vehicleId);
             return View(vehicle);
         }
+        [Authorize(Roles = "EmployeeUser")]
         public IActionResult ChangeVehicle(int vehicleId)
         {
             var vehicle = _vehicleService.GetVehicleById(vehicleId);
@@ -72,13 +74,13 @@ namespace VehicleApp.WebApp.Controllers
             return RedirectToAction("Vehicles", "Vehicle");
 
         }
+        [Authorize(Roles = "Manager")]
         public IActionResult RemoveVehicle(int vehicleId)
         {
             var vehicle = _vehicleService.GetVehicleById(vehicleId);
             return View(vehicle);
         }
         [HttpPost]
-        [Authorize(Roles = "Manager")]
         public IActionResult RemoveVehicle(VehicleViewModel model)
         {
 

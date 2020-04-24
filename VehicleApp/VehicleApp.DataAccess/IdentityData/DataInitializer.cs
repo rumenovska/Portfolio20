@@ -58,11 +58,13 @@ namespace VehicleApp.DataAccess.IdentityData
         {
             if (userManager.FindByNameAsync("rumenov").Result == null)
             {
-                MyIdentityUser user = new MyIdentityUser();
-                user.UserName = "rumenov";
-                user.Email = "rumenov@gmail.com";
-                user.FullName = "Nancy Rmenov";
-                user.BirthDate = new DateTime(1994, 8, 1);
+                MyIdentityUser user = new MyIdentityUser
+                {
+                    UserName = "rumenov",
+                    Email = "rumenov@gmail.com",
+                    FullName = "Nancy Rmenov",
+                    BirthDate = new DateTime(1994, 8, 1)
+                };
 
                 IdentityResult result = userManager.CreateAsync(user, "Rumonov123.").Result;
 
@@ -75,11 +77,13 @@ namespace VehicleApp.DataAccess.IdentityData
 
             if (userManager.FindByNameAsync("xhevo").Result == null)
             {
-                MyIdentityUser user = new MyIdentityUser();
-                user.UserName = "xhevo";
-                user.Email = "xhevo@hotmail.com";
-                user.FullName = "Xhevo Smith";
-                user.BirthDate = new DateTime(1965, 1, 1);
+                MyIdentityUser user = new MyIdentityUser
+                {
+                    UserName = "xhevo",
+                    Email = "xhevo@hotmail.com",
+                    FullName = "Xhevo Smith",
+                    BirthDate = new DateTime(1965, 1, 1)
+                };
 
                 IdentityResult result = userManager.CreateAsync(user, "Xhevo123.").Result;
 

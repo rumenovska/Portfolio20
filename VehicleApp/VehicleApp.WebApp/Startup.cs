@@ -47,7 +47,7 @@ namespace VehicleApp.WebApp
             //services.AddDbContext<VehicleAppDbContext>(opts => opts
             //   .UseSqlServer(Configuration.GetConnectionString("VehicleConnectionString")));
 
-           
+
             services.AddTransient<IDataInitializer, DataInitializer>();
             services.AddTransient<IRepository<Vehicle>, VehicleRepo>();
             services.AddTransient<IRepository<Expense>, ExpenceRepo>();
@@ -63,7 +63,8 @@ namespace VehicleApp.WebApp
                 PositionClass = ToastPositions.TopRight,
                 CloseButton = true
             });
-
+            //services.AddDbContext<VehicleAppDbContext>(option =>
+            //option.UseSqlServer(connectionString: Configuration.GetConnectionString("VehicleConnectionString")));
             if (Configuration.GetValue<bool>("UseInMemoryDatabase"))
             {
                 // use an in memory database instead of a real sql database
@@ -71,9 +72,19 @@ namespace VehicleApp.WebApp
             }
 
 
-            services.AddIdentity<MyIdentityUser, MyIdentityRole>()
+                services.AddIdentity<MyIdentityUser, MyIdentityRole>()
                 .AddEntityFrameworkStores<VehicleAppDbContext>()
                 .AddDefaultTokenProviders();
+
+            //services.AddIdentity<MyIdentityUser, IdentityRole>(options =>
+            //{
+            //    options.User.RequireUniqueEmail = false;
+            //    options.Password.RequireNonAlphanumeric = false;
+            //})
+            //.AddRoleManager<RoleManager<IdentityRole>>()
+            //.AddEntityFrameworkStores<VehicleAppDbContext>()
+            //.AddDefaultTokenProviders();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -82,7 +93,7 @@ namespace VehicleApp.WebApp
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+               app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -92,9 +103,9 @@ namespace VehicleApp.WebApp
 
             if (Configuration.GetValue<bool>("SeedDatabase"))
             {
-                using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+                using (IServiceScope scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
                 {
-                    var dataInitializer = scope.ServiceProvider.GetRequiredService<IDataInitializer>();
+                    IDataInitializer dataInitializer = scope.ServiceProvider.GetRequiredService<IDataInitializer>();
                     dataInitializer.InitializeData();
                 }
             }

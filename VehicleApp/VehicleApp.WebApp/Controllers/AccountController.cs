@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VehicleApp.DataAccess.IdentityData;
+using VehicleApp.Domain.Constants;
 using VehicleApp.WebModels;
 
 namespace VehicleApp.WebApp.Controllers
@@ -25,13 +26,13 @@ namespace VehicleApp.WebApp.Controllers
             this.loginManager = loginManager;
             this.roleManager = roleManager;
         }
-        [HttpPost]
-        [Authorize(Roles = "Manager")]
+
+
+        [Authorize(Roles = Roles.Manager)]
         public IActionResult Register()
         {
             return View();
         }
-        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -39,39 +40,25 @@ namespace VehicleApp.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                MyIdentityUser user = new MyIdentityUser();
-                user.UserName = obj.UserName;
-                user.Email = obj.Email;
-                user.FullName = obj.FullName;
-                user.BirthDate = obj.BirthDate;
+                MyIdentityUser user = new MyIdentityUser
+                {
+                    UserName = obj.UserName,
+                    Email = obj.Email,
+                    FullName = obj.FullName,
+                    BirthDate = obj.BirthDate
+                };
 
-                IdentityResult result = userManager.CreateAsync
-                (user, obj.Password).Result;
+                IdentityResult result = userManager.CreateAsync (user, obj.Password).Result;
 
                 if (result.Succeeded)
                 {
-                    if (!roleManager.RoleExistsAsync("NormalUser").Result)
-                    {
-                        MyIdentityRole role = new MyIdentityRole();
-                        role.Name = "NormalUser";
-                        role.Description = "Perform normal operations.";
-                        IdentityResult roleResult = roleManager.
-                        CreateAsync(role).Result;
-                        if (!roleResult.Succeeded)
-                        {
-                            ModelState.AddModelError("",
-                             "Error while creating role!");
-                            return View(obj);
-                        }
-                    }
-
-                    userManager.AddToRoleAsync(user,
-                                 "NormalUser").Wait();
-                    return RedirectToAction("Login", "Account");
+                    userManager.AddToRoleAsync(user, Roles.Employee).Wait();
+                    return RedirectToAction("Index", "Home");
                 }
             }
             return View(obj);
         }
+
 
         public IActionResult Login()
         {
@@ -90,7 +77,7 @@ namespace VehicleApp.WebApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Vehicles", "Vehicle");
                 }
 
                 ModelState.AddModelError("", "Invalid login!");
@@ -99,12 +86,11 @@ namespace VehicleApp.WebApp.Controllers
             return View(obj);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult LogOff()
+
+        public IActionResult Logout()
         {
             loginManager.SignOutAsync().Wait();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Home");
         }
 
 

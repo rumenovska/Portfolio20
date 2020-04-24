@@ -1,4 +1,7 @@
 ﻿<!DOCTYPE html>
+@{
+    bool isAdmin = User.IsInRole("Manager");
+}
 <html>
 <head>
     <meta charset="utf-8" />
@@ -33,8 +36,31 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    
+                    @if (isAdmin)
+                    {
+                        <li><a asp-area="" asp-controller="Account" asp-action="Register">Create An Employee Account</a></li>
+                    }
+                   
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                            <li><a asp-area="" asp-controller="Vehicle" asp-action="Vehicles">Vehicles</a></li>
+
+                    }
+
                 </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="align-right"><a asp-area="" asp-controller="Account" asp-action="Logout">Log out</a></li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="align-right"><a asp-area="" asp-controller="Users" asp-action="LogIn">Log in</a></li>
+                    </ul>
+                }
+                
             </div>
         </div>
     </nav>
