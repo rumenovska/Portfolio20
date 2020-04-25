@@ -71,8 +71,9 @@ namespace VehicleApp.WebApp.Controllers
             return View(vehicle);
         }
 
-        [Authorize(Roles = Roles.Manager)]
+        
         [HttpPost]
+        [Authorize(Roles = Roles.Manager)]
         public IActionResult ChangeVehicle(VehicleViewModel model)
         {
 
@@ -82,8 +83,8 @@ namespace VehicleApp.WebApp.Controllers
             return RedirectToAction("Vehicles", "Vehicle");
 
         }
-        [Authorize(Roles = Roles.Manager)]
 
+        [Authorize(Roles = Roles.Manager)]
         public IActionResult RemoveVehicle(int vehicleId)
         {
             var vehicle = _vehicleService.GetVehicleById(vehicleId);

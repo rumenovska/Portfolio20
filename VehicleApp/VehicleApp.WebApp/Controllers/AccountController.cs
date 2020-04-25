@@ -37,6 +37,7 @@ namespace VehicleApp.WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Roles.Manager)]
         public IActionResult Register(RegisterViewModel obj)
         {
             if (ModelState.IsValid)
@@ -55,7 +56,7 @@ namespace VehicleApp.WebApp.Controllers
                 {
                     userManager.AddToRoleAsync(user, Roles.Employee).Wait();
                     _toastNotification.AddSuccessToastMessage("Employee Acconut Was Successfuly Registered!!!");
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Vehicles", "Vehicle");
                 }
             }
             return View(obj);
@@ -95,7 +96,7 @@ namespace VehicleApp.WebApp.Controllers
         {
             loginManager.SignOutAsync().Wait();
             _toastNotification.AddInfoToastMessage("Successfully signed out!");
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
 

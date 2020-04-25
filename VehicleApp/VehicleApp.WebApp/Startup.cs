@@ -120,7 +120,7 @@ namespace VehicleApp.WebApp
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=home}/{action=index}/{id?}");
+                    template: "{controller=account}/{action=login}/{id?}");
             });
 
 

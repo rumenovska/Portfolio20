@@ -45,7 +45,7 @@
 
         <div class="col-md-3">
             <label>RegistrationExpiryDate</label>
-            <input  type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.RegistrationExpiryDate.ToString("dd/MM/yyyy")" readonly>
+            <input type="text" class="form-control mb-2" id="inlineFormInput" value="@Model.RegistrationExpiryDate.ToString("dd/MM/yyyy")" readonly>
         </div>
 
         <div class="col-md-3">
@@ -76,7 +76,12 @@
     <br />
 
     <a class="btn btn-info" asp-controller="Vehicle" asp-action="Vehicles">Back</a>
-    <a class="btn btn-info" asp-controller="Vehicle" asp-action="ChangeVehicle" asp-route-vehicleId="@Model.Id">Change</a>
+
+    @if (User.IsInRole(VehicleApp.Domain.Constants.Roles.Manager))
+    {
+        <a class="btn btn-info" asp-controller="Vehicle" asp-action="ChangeVehicle" asp-route-vehicleId="@Model.Id">Change</a>
+    }
+
 
 
 </div>
