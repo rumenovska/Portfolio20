@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 using VehicleApp.DataAccess.IdentityData;
 using VehicleApp.Domain.Constants;
 using VehicleApp.WebModels;
@@ -16,15 +17,15 @@ namespace VehicleApp.WebApp.Controllers
         private readonly UserManager<MyIdentityUser> userManager;
         private readonly SignInManager<MyIdentityUser> loginManager;
         private readonly RoleManager<MyIdentityRole> roleManager;
+        private readonly IToastNotification _toastNotification;
 
 
-        public AccountController(UserManager<MyIdentityUser> userManager,
-           SignInManager<MyIdentityUser> loginManager,
-           RoleManager<MyIdentityRole> roleManager)
+        public AccountController(UserManager<MyIdentityUser> userManager, SignInManager<MyIdentityUser> loginManager, RoleManager<MyIdentityRole> roleManager, IToastNotification toastNotification)
         {
             this.userManager = userManager;
             this.loginManager = loginManager;
             this.roleManager = roleManager;
+            _toastNotification = toastNotification;
         }
 
 
@@ -53,6 +54,7 @@ namespace VehicleApp.WebApp.Controllers
                 if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(user, Roles.Employee).Wait();
+                    _toastNotification.AddSuccessToastMessage("Employee Acconut Was Successfuly Registered!!!");
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -77,6 +79,8 @@ namespace VehicleApp.WebApp.Controllers
 
                 if (result.Succeeded)
                 {
+                   
+                    _toastNotification.AddInfoToastMessage("Successfully logged in!");
                     return RedirectToAction("Vehicles", "Vehicle");
                 }
 
@@ -90,6 +94,7 @@ namespace VehicleApp.WebApp.Controllers
         public IActionResult Logout()
         {
             loginManager.SignOutAsync().Wait();
+            _toastNotification.AddInfoToastMessage("Successfully signed out!");
             return RedirectToAction("Index", "Home");
         }
 

@@ -1,10 +1,11 @@
 ﻿@model List<VehicleViewModel>
 @{
     ViewData["Title"] = "Vehicles";
-    
 }
 
-
+@{
+    bool isAdmin = User.IsInRole("Manager");
+}
 <style>
     .myTable > tbody > tr > td, .mytable > tbody > tr > th, .myTable > thead > tr > td, .myTable > thead > tr > th {
         padding: 12px;
@@ -109,15 +110,11 @@
                                 <a asp-controller="Order"
                                    asp-action="AddOrder"
                                    asp-route-vehicleId="@vehicle.Id">Add Expence</a>
-                                <a asp-controller="Vehicle"
-                                   asp-action="RemoveVehicle"
-                                   asp-route-vehicleId="@vehicle.Id">Remove</a>
-                                @*<a asp-controller="Dogovor"
-        asp-action="AddDogovor"
-        asp-route-voziloId="@vozilo.Id">Додади Договор</a>*@
-                                @*<a asp-controller="Servis"
-        asp-action="AddServis"
-        asp-route-voziloId="@vozilo.Id">Додади Сервис</a>*@
+                                @if (isAdmin)
+                                {  <a asp-controller="Vehicle"
+                                    asp-action="RemoveVehicle"
+                                    asp-route-vehicleId="@vehicle.Id">Remove</a>
+                                }
                             </div>
                         </div>
                     </div>

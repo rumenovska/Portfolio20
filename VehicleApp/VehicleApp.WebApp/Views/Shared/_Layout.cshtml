@@ -6,7 +6,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - VehicleApp.WebApp</title>
+    @{
+        ViewData["Title"] = "𝕍𝕖𝕙𝕚𝕔𝕝𝕖𝕤 𝔸𝕡𝕡";
+    }
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -29,7 +31,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">VehicleApp.WebApp</a>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">𝕍𝕖𝕙𝕚𝕔𝕝𝕖𝕤 𝔸𝕡𝕡</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -45,7 +47,7 @@
                     {
                             <li><a asp-area="" asp-controller="Vehicle" asp-action="Vehicles">Vehicles</a></li>
 
-                    }
+                     }
 
                 </ul>
                 @if (User.Identity.IsAuthenticated)
@@ -57,7 +59,7 @@
                 else
                 {
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="align-right"><a asp-area="" asp-controller="Users" asp-action="LogIn">Log in</a></li>
+                        <li class="align-right"><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
                     </ul>
                 }
                 
@@ -71,7 +73,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2020 - VehicleApp.WebApp</p>
+            <p>&copy; 2020 - VehicleApp</p>
         </footer>
     </div>
 
