@@ -32,7 +32,9 @@ namespace VehicleApp.DataAccess
                .WithMany(p => p.Expenses)
                .HasForeignKey(ex => ex.ProductId);
 
-
+            modelBuilder.Entity<Product>().HasData(
+                new Product() { }
+            );
         }
     }
 }

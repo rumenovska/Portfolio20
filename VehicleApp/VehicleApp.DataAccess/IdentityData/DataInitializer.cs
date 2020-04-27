@@ -96,14 +96,17 @@ namespace VehicleApp.DataAccess.IdentityData
 
         private void SeedProducts()
         {
-            //if (dbContext.Products.FirstOrDefault(p => p.ProductName == "Gorivo") == null)
-            //{
-            //    Product newProdcut = new Product
-            //    {
-            //        ProductName = "Gorivo",
-            //}
-            //}
+            if (context.Products.FirstOrDefault(p => p.ProductName == "Gorivo") == null)
+            {
+                Product newProdcut = new Product
+                {
+                    ProductName = "Gorivo",
+                    Description = ""
+                };
+            }
         }
+
+        
     }
 }
 

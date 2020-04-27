@@ -22,6 +22,7 @@ namespace VehicleApp.WebModels
         public bool Malfunction { get; set; }
         public bool Loan { get; set; }
         public string EmployeeName { get; set; }
+        public string EmployeeEmail { get; set; }
         public string DisplayDate { get; set; }
         public virtual List<Expense> Expenses { get; set; }
 

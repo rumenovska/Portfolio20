@@ -13,7 +13,10 @@
                 <label>Employee Name</label>
                 <input asp-for="EmployeeName" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Employee Name">
             </div>
-
+            <div class="col-md-3">
+                <label>Employee Email</label>
+                <input asp-for="EmployeeEmail" type="email" class="form-control mb-2" id="inlineFormInput" placeholder="Employee Email">
+            </div>
             <div class="col-md-3">
                 <label>Directorate</label>
                 <input asp-for="Directorate" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Directorate">
@@ -24,16 +27,7 @@
                 <input asp-for="Brand" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Brand">
             </div>
 
-            <div class="col-md-3">
-
-                <label>Vehicle Type</label>
-                <select asp-for="VehicleType" class="form-control mb-2">
-                    <option value="" selected>Select</option>
-                    <option value="Car">Car</option>
-                    <option value="Truck">Truck</option>
-                    <option value="Motorcycle">Motorcycle</option>
-                </select>
-            </div>
+          
 
 
         </div>
@@ -62,6 +56,16 @@
         </div>
         <br />
         <div class="row">
+            <div class="col-md-3">
+
+                <label>Vehicle Type</label>
+                <select asp-for="VehicleType" class="form-control mb-2">
+                    <option value="" selected>Select</option>
+                    <option value="Car">Car</option>
+                    <option value="Truck">Truck</option>
+                    <option value="Motorcycle">Motorcycle</option>
+                </select>
+            </div>
             <div class="col-md-3">
                 <label>Color</label>
                 <input asp-for="Color" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Color">
