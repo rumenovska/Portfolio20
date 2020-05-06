@@ -13,9 +13,9 @@ namespace VehicleApp.Services.Services
 {
     public class ExpenceService: IExpenceService
     {
-        private readonly IRepository<Expense> _expenceRepository;
+        private readonly IRepository<Expence> _expenceRepository;
         private readonly IMapper _mapper;
-        public ExpenceService(IRepository<Expense> expenceRepository, IMapper mapper)
+        public ExpenceService(IRepository<Expence> expenceRepository, IMapper mapper)
         {
             _expenceRepository = expenceRepository;
             _mapper = mapper;

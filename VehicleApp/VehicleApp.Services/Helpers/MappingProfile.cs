@@ -16,12 +16,12 @@ namespace VehicleApp.Services.Helpers
                 .ForMember(dest => dest.DisplayDate, src => src.Ignore())
                 .ReverseMap();
 
-            CreateMap<Product, ProductViewModel>()
+            CreateMap<ExpenceType, ExpenceTypeViewModel>()
                 .ForMember(dest => dest.Expenses, src => src.MapFrom(x => x.Expenses))
                 .ReverseMap();
 
-            CreateMap<Expense, ExpenceViewModel>()
-                .ForMember(dest => dest.Product, src => src.MapFrom(x => x.Product))
+            CreateMap<Expence, ExpenceViewModel>()
+                .ForMember(dest => dest.ExpenceTypeViewModel, src => src.MapFrom(x => x.ExpenceType))
                 .ForMember(dest => dest.Vehicle, src => src.MapFrom(x => x.Vehicle))
                 .ReverseMap();
         }

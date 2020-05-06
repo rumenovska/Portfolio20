@@ -5,12 +5,12 @@ using VehicleApp.WebModels;
 
 namespace VehicleApp.Services.Interfaces
 {
-    public interface IProductService
+    public interface IExpenceTypeService
     {
-        IEnumerable<ProductViewModel> GetAllProducts();
-        ProductViewModel GetProductById(int id);
-        int CreateProduct(ProductViewModel product);
-        int UpdateProduct(ProductViewModel product);
-        int RemoveProduct(int id);
+        IEnumerable<ExpenceTypeViewModel> GetAllExpenceTypes();
+        ExpenceTypeViewModel GetExpenceTypeById(int id);
+        int CreateExpenceType(ExpenceTypeViewModel expenceType);
+        int UpdateExpenceType(ExpenceTypeViewModel expenceType);
+        int RemoveExpenceType(int id);
     }
 }

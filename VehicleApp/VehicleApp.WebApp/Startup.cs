@@ -50,12 +50,12 @@ namespace VehicleApp.WebApp
 
             services.AddTransient<IDataInitializer, DataInitializer>();
             services.AddTransient<IRepository<Vehicle>, VehicleRepo>();
-            services.AddTransient<IRepository<Expense>, ExpenceRepo>();
-            services.AddTransient<IRepository<Product>, ProductRepo>();
+            services.AddTransient<IRepository<Expence>, ExpenceRepo>();
+            services.AddTransient<IRepository<ExpenceType>, ExpenceTypeRepository>();
 
             services.AddTransient<IVehicleService, VehicleService>();
             services.AddTransient<IExpenceService, ExpenceService>();
-            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IExpenceTypeService, ExpenceTypeService>();
             services.AddAutoMapper();
             services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
             {

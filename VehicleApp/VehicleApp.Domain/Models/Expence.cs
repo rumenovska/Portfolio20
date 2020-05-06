@@ -6,7 +6,7 @@ using System.Text;
 
 namespace VehicleApp.Domain.Models
 {
-    public class Expense
+    public class Expence
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,9 +19,9 @@ namespace VehicleApp.Domain.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime CreatedDate { get; set; }
 
-        [ForeignKey("Product")]
-        public int ProductId { get; set; }
-        public virtual Product Product { get; set; }
+        [ForeignKey("ExpenceType")]
+        public int ExpenceTypeId { get; set; }
+        public virtual ExpenceType ExpenceType { get; set; }
 
         [ForeignKey("Vehicle")]
         public int VehicleId { get; set; }

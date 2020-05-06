@@ -37,6 +37,6 @@ namespace VehicleApp.Domain.Models
         public string EmployeeName { get; set; }
         [Required]
         public string EmployeeEmail { get; set; }
-        public virtual List<Expense> Expenses { get; set; }
+        public virtual List<Expence> Expenses { get; set; }
     }
 }

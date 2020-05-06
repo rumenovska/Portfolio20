@@ -8,43 +8,43 @@ using VehicleApp.Domain.Models;
 
 namespace VehicleApp.DataAccess.Repositories
 {
-    public class ProductRepo: BaseRepo, IRepository<Product>
+    public class ExpenceTypeRepository: BaseRepo, IRepository<ExpenceType>
     {
-        public ProductRepo(VehicleAppDbContext context) : base(context) { }
+        public ExpenceTypeRepository(VehicleAppDbContext context) : base(context) { }
 
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<ExpenceType> GetAll()
         {
-            return _context.Products
+            return _context.ExpenceTypes
                 .Include(p => p.Expenses);
                 
         }
 
-        public Product GetById(int id)
+        public ExpenceType GetById(int id)
         {
-            return _context.Products
+            return _context.ExpenceTypes
                 .Include(p=> p.Expenses)
                 .FirstOrDefault(p => p.Id == id);
                 
         }
 
-        public int Insert(Product entity)
+        public int Insert(ExpenceType entity)
         {
             _context.Add(entity);
             return _context.SaveChanges();
         }
 
-        public int Update(Product entity)
+        public int Update(ExpenceType entity)
         {
             _context.Update(entity);
             return _context.SaveChanges();
         }
         public int Delete(int id)
         {
-            Product product = GetById(id);
+            ExpenceType expenceType = GetById(id);
 
-            if(product != null)
+            if(expenceType != null)
             {
-                _context.Remove(product);
+                _context.Remove(expenceType);
                 return _context.SaveChanges();
             }
 

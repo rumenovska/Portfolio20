@@ -15,26 +15,23 @@ namespace VehicleApp.DataAccess
         public VehicleAppDbContext(DbContextOptions<VehicleAppDbContext> options) : base(options) { }
 
         public DbSet<Vehicle> Vehicles { get; set; }
-        public DbSet<Expense> Expenses { get; set; }
-        public DbSet<Product> Products { get; set; }
+        public DbSet<Expence> Expenses { get; set; }
+        public DbSet<ExpenceType> ExpenceTypes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Expense>()
+            modelBuilder.Entity<Expence>()
                 .HasOne(ex => ex.Vehicle)
                 .WithMany(v => v.Expenses)
                 .HasForeignKey(ex => ex.VehicleId);
 
-            modelBuilder.Entity<Expense>()
-               .HasOne(ex => ex.Product)
+            modelBuilder.Entity<Expence>()
+               .HasOne(ex => ex.ExpenceType)
                .WithMany(p => p.Expenses)
-               .HasForeignKey(ex => ex.ProductId);
+               .HasForeignKey(ex => ex.ExpenceTypeId);
 
-            modelBuilder.Entity<Product>().HasData(
-                new Product() { }
-            );
         }
     }
 }

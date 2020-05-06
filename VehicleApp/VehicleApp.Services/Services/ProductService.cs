@@ -9,36 +9,36 @@ using VehicleApp.WebModels;
 
 namespace VehicleApp.Services.Services
 {
-    public class ProductService : IProductService
+    public class ExpenceTypeService : IExpenceTypeService
     {
-        private readonly IRepository<Product> _productRepository;
+        private readonly IRepository<ExpenceType> _expenceTypeRepository;
         private readonly IMapper _mapper;
-        public ProductService(IRepository<Product> productRepository, IMapper mapper)
+        public ExpenceTypeService(IRepository<ExpenceType> expenceTypeRepository, IMapper mapper)
         {
-            _productRepository = productRepository;
+            _expenceTypeRepository = expenceTypeRepository;
             _mapper = mapper;
         }
 
-        public IEnumerable<ProductViewModel> GetAllProducts()
+        public IEnumerable<ExpenceTypeViewModel> GetAllExpenceTypes()
         {
-            return _mapper.Map<List<ProductViewModel>>(_productRepository.GetAll());
+            return _mapper.Map<List<ExpenceTypeViewModel>>(_expenceTypeRepository.GetAll());
         }
 
-        public ProductViewModel GetProductById(int id)
+        public ExpenceTypeViewModel GetExpenceTypeById(int id)
         {
-            return _mapper.Map<ProductViewModel>(_productRepository.GetById(id));
+            return _mapper.Map<ExpenceTypeViewModel>(_expenceTypeRepository.GetById(id));
         }
-        public int CreateProduct(ProductViewModel product)
+        public int CreateExpenceType(ExpenceTypeViewModel expenceType)
         {
-            Product mappedProduct = _mapper.Map<Product>(product);
-            return _productRepository.Insert(mappedProduct);
+            ExpenceType mappedExpenceType = _mapper.Map<ExpenceType>(expenceType);
+            return _expenceTypeRepository.Insert(mappedExpenceType);
         }
-        public int UpdateProduct(ProductViewModel product)
+        public int UpdateExpenceType(ExpenceTypeViewModel expenceType)
         {
-            Product mappedProduct = _mapper.Map<Product>(product);
-            return _productRepository.Update(mappedProduct);
+            ExpenceType mappedExpenceType = _mapper.Map<ExpenceType>(expenceType);
+            return _expenceTypeRepository.Update(mappedExpenceType);
         }
-        public int RemoveProduct(int id)
+        public int RemoveExpenceType(int id)
         {
             throw new NotImplementedException();
         }

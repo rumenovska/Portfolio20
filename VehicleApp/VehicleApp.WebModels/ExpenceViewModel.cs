@@ -20,9 +20,9 @@ namespace VehicleApp.WebModels
         public DateTime CreatedDate { get; set; }
 
 
-        public int ProductId { get; set; }
+        public int ExpenceTypeId { get; set; }
 
-        public virtual ProductViewModel Product { get; set; }
+        public virtual ExpenceTypeViewModel ExpenceTypeViewModel { get; set; }
 
         public int VehicleId { get; set; }
 

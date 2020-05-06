@@ -6,6 +6,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using VehicleApp.DataAccess.Interfaces;
 using VehicleApp.Domain.Models;
+using VehicleApp.Domain.Models.Enums;
 
 namespace VehicleApp.DataAccess.IdentityData
 {
@@ -26,7 +27,7 @@ namespace VehicleApp.DataAccess.IdentityData
         {
             SeedRoles();
             SeedUsers();
-            SeedProducts();
+            SeedExpenceTypes();
         }
 
         private void SeedRoles()
@@ -94,14 +95,14 @@ namespace VehicleApp.DataAccess.IdentityData
             }
         }
 
-        private void SeedProducts()
+        private void SeedExpenceTypes()
         {
-            if (context.Products.FirstOrDefault(p => p.ProductName == "Gorivo") == null)
+            if (context.ExpenceTypes.FirstOrDefault(et => et.Name == "Fuel Oil") == null)
             {
-                Product newProdcut = new Product
+                ExpenceType newProdcut = new ExpenceType
                 {
-                    ProductName = "Gorivo",
-                    Description = ""
+                    Name = "Fuel Oil"
+
                 };
             }
         }
