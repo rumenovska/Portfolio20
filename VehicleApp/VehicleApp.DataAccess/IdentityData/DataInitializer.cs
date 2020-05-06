@@ -6,7 +6,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using VehicleApp.DataAccess.Interfaces;
 using VehicleApp.Domain.Models;
-using VehicleApp.Domain.Models.Enums;
+
 
 namespace VehicleApp.DataAccess.IdentityData
 {
