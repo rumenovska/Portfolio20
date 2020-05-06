@@ -97,17 +97,25 @@ namespace VehicleApp.DataAccess.IdentityData
 
         private void SeedExpenceTypes()
         {
-            if (context.ExpenceTypes.FirstOrDefault(et => et.Name == "Fuel Oil") == null)
+            if (context.ExpenceTypes.FirstOrDefault(et => et.Name == "Fuel") == null)
             {
-                ExpenceType newProdcut = new ExpenceType
+                ExpenceType FuelExpenceType = new ExpenceType
                 {
-                    Name = "Fuel Oil"
-
+                    Name = "Fuel"
                 };
+                context.ExpenceTypes.Add(FuelExpenceType);  
+            }
+
+            if (context.ExpenceTypes.FirstOrDefault(et => et.Name == "Oil") == null)
+            {
+                ExpenceType OilExpenceType = new ExpenceType
+                {
+                    Name = "Oil"
+                };
+                context.ExpenceTypes.Add(OilExpenceType);
             }
         }
 
-        
     }
 }
 
