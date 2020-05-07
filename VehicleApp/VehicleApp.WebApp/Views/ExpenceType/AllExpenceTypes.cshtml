@@ -1,11 +1,9 @@
-﻿@model List<VehicleViewModel>
+﻿@model List<ExpenceTypeViewModel>
 @{
-    ViewData["Title"] = "Vehicles";
+    ViewData["Title"] = "AllExpenceTypes";
 }
 
-@{
-    bool isAdmin = User.IsInRole("Manager");
-}
+<h2>𝔸𝕝𝕝 𝔼𝕩𝕡𝕖𝕟𝕔𝕖 𝕋𝕪𝕡𝕖𝕤</h2>
 <style>
     .myTable > tbody > tr > td, .mytable > tbody > tr > th, .myTable > thead > tr > td, .myTable > thead > tr > th {
         padding: 12px;
@@ -80,20 +78,17 @@
 </style>
 <br />
 <br />
+
 <table style="overflow-x:auto; white-space:nowrap; margin:auto;" class=" table-bordered table-striped  myTable">
     <thead>
         <tr>
             <th id="button-col"></th>
-            <th scope="col">Employee Name</th>
-            <th scope="col">Directorate</th>
-            <th scope="col">Vehicle Registered Number </th>
-            <th scope="col">Registration Expiry Date</th>
-
-
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var vehicle in Model)
+        @foreach (var expenceType in Model)
         {
             <tr>
                 <td id="button-col" align="center">
@@ -104,58 +99,21 @@
                                 <i class="fa fa-caret-down"></i>
                             </button>
                             <div class="options_dropdown-content">
-                                <a asp-controller="Vehicle"
-                                   asp-action="DetailsVehicle"
-                                   asp-route-vehicleId="@vehicle.Id">Details</a>
-                                <a asp-controller="Expence"
-                                   asp-action="AddExpence"
-                                   asp-route-vehicleId="@vehicle.Id">Add Expence</a>
-                                @if (isAdmin)
-                                {<a asp-controller="Vehicle"
-                                    asp-action="RemoveVehicle"
-                                    asp-route-vehicleId="@vehicle.Id">Remove</a>
+                                <a asp-controller="ExpenceType"
+                                   asp-action="UpdateExpenceType"
+                                   asp-route-expenceTypeId="@expenceType.Id">Edit</a>
+                                <a asp-controller="ExpenceType"
+                                   asp-action="RemoveExpenceType"
+                                   asp-route-expenceTypeId="@expenceType.Id">Remove</a>
 
-                                }
                             </div>
                         </div>
                     </div>
                 </td>
-                <td>@vehicle.EmployeeName</td>
-                <td>@vehicle.Directorate</td>
-                <td>@vehicle.VehicleRegisteredNum</td>
-                @if (vehicle.IsExpiredRegistration(vehicle.RegistrationExpiryDate))
-                {
-                    <td>@vehicle.DisplayDate</td>
-                }
-                else
-                {
-                    <td>@vehicle.RegistrationExpiryDate.ToString("dd/MM/yyyy")</td>
-                }
-
-
-
+                <td>@expenceType.Name</td>
+                <td>@expenceType.Description</td>
             </tr>
-        }
+         }
     </tbody>
 </table>
-<div class="row">
-    <div class="col-md-2">
-        <a class="btn btn-primary btn-lg" asp-controller="Vehicle" asp-action="AddVehicle">Add Vehicle</a>
-    </div>
-</div>
-<br />
-<br />
-<div class="row">
-    <div class="col-md-2">
-        @if (isAdmin)
-        {
-            <a class="btn btn-primary btn-lg" asp-controller="ExpenceType" asp-action="AddExpenceType">Add Expence Type</a>
-        }
-    </div>
-</div>   
-    
-    
-
-
-
 

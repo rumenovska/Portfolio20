@@ -1,0 +1,27 @@
+﻿@model ExpenceTypeViewModel
+@{
+    ViewData["Title"] = "UpdateExpenceType";
+}
+
+    <h2>𝕌𝕡𝕕𝕒𝕥𝕖 𝔼𝕩𝕡𝕖𝕟𝕔𝕖 𝕋𝕪𝕡𝕖</h2>
+    <form asp-controller="ExpenceType" asp-action="UpdateExpenceType" method="post">
+        <div class="form-row align-items-center">
+            <div class="row">
+                <div><input asp-for="Id" value="@Model.Id" hidden /></div>
+                <div class="col-md-3">
+                    <label>Name</label>
+                    <input asp-for="Name" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="@Model.Name">
+                </div>
+
+                <div class="col-md-3">
+                    <label>Description</label>
+                    <input asp-for="Description" type="text" class="form-control mb-2" id="inlineFormInput" placeholder="@Model.Description">
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">Save Changes</button>
+        </div>
+    </form>
+

@@ -116,6 +116,15 @@ namespace VehicleApp.DataAccess.IdentityData
             }
         }
 
+                        //<option value = "ULTRA 100 RACE PRO" > ULTRA 100 RACE PRO</option>
+                        //<option value = "ULTRA 95+ ЕCONOMY" > ULTRA 95+ ЕCONOMY</option>
+                        //    <option value = "ULTRA DIESEL GREEN POWER" > ULTRA DIESEL GREEN POWER</option>
+                        //    <option value = "ULTRA DIESEL BIO POWER" > ULTRA DIESEL BIO POWER</option>
+                        //    <option value = "ULTRA DIESEL BIO POWER" > ULTRA DIESEL BIO POWER</option>
+                        //    <option value = "ULTRA LPG PLUS" > ULTRA LPG PLUS</option>
+                        //<option value = "ULTRA CNG" > ULTRA CNG</option>
+
+
     }
 }
 

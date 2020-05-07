@@ -40,7 +40,8 @@ namespace VehicleApp.Services.Services
         }
         public int RemoveExpenceType(int id)
         {
-            throw new NotImplementedException();
+            ExpenceType expenceType = _mapper.Map<ExpenceType>(GetExpenceTypeById(id));
+            return  _expenceTypeRepository.Delete(expenceType.Id);
         }
     }
 }
