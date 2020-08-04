@@ -88,8 +88,10 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var expenceType in Model)
+        @if (Model != null)
         {
+          @foreach (var expenceType in Model)
+          {
             <tr>
                 <td id="button-col" align="center">
                     <div class="options_navbar">
@@ -113,7 +115,8 @@
                 <td>@expenceType.Name</td>
                 <td>@expenceType.Description</td>
             </tr>
-         }
+          }
+        }
     </tbody>
 </table>
 
