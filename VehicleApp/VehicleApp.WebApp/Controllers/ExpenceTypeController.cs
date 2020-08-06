@@ -49,13 +49,16 @@ namespace VehicleApp.WebApp.Controllers
         [Authorize(Roles = Roles.Manager)]
         public IActionResult AllExpenceTypes()
         {
-            return View();
+            var expences = _expenceTypeService.GetAllExpenceTypes();
+
+            return View(expences);
         }
 
         [Authorize(Roles = Roles.Manager)]
-        public IActionResult UpdateExpenceType()
+        public IActionResult UpdateExpenceType(int expenceTypeId)
         {
-            return View();
+            var expence = _expenceTypeService.GetExpenceTypeById(expenceTypeId);
+            return View(expence);
         }
 
         [Authorize(Roles = Roles.Manager)]
@@ -68,6 +71,15 @@ namespace VehicleApp.WebApp.Controllers
         }
 
         [Authorize(Roles = Roles.Manager)]
+        public IActionResult RemoveExpenceType(int expenceTypeId)
+        {
+            var expence = _expenceTypeService.GetExpenceTypeById(expenceTypeId);
+            return View(expence);
+        }
+
+
+        [Authorize(Roles = Roles.Manager)]
+        [HttpPost]
         public IActionResult RemoveExpenceType(ExpenceTypeViewModel model)
         {
             _expenceTypeService.RemoveExpenceType(model.Id);

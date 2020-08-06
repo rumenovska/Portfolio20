@@ -101,7 +101,6 @@ namespace VehicleApp.DataAccess.IdentityData
             {
                 ExpenceType FuelExpenceType = new ExpenceType
                 {
-                    
                     Name = "Fuel"
                 };
                 context.ExpenceTypes.Add(FuelExpenceType);  
